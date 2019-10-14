@@ -1,0 +1,1 @@
+A simple bot that uses input from a user to run some basic functions to display an output to the user. 
