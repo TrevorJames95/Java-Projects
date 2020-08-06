@@ -4,190 +4,340 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void printField(char[][] arr) {
-        System.out.println("---------");
-        for (int i = 0; i < 3; i++) {
-            System.out.print("| ");
-            for (int j = 0; j < 3; j++) {
-                System.out.print(arr[i][j] + " ");
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input command: ");
+        String [] inputs = scanner.nextLine().split(" ");
+        String players = null;
+
+        while(inputs[0].equals("start") && !inputs[0].equals("exit")){
+            try{
+                if(inputs[1].equals("easy") || inputs[1].equals("user") || inputs[1].equals("medium") ||
+                        inputs[1].equals("hard")){
+                    players = inputs[1];
+                }
+                else throw new Exception();
+
+                if(inputs[2].equals("easy") || inputs[2].equals("user") || inputs[2].equals("medium") ||
+                        inputs[2].equals("hard")){
+                    players+= inputs[2];
+                }
+                else throw new Exception();
             }
-            System.out.println("|");
-        }
-        System.out.println("---------");
-    }
-
-    public static char[][] fillField(String cells) {
-        char[][] arr = new char[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                char fieldChar = cells.charAt( 3* i + j);
-                arr[i][j] = fieldChar;
+            catch(Exception e){
+                System.out.println("Bad parameters!");
+                System.out.print("Input command: ");
+                inputs = scanner.nextLine().split(" ");
             }
-        }
-        return arr;
-    }
 
-    public static boolean checkWin(char[][] arr) {
+            if(!players.equals("")){
+                switch(players){
+                    case "easyeasy":
+                    {
+                        Board board = new Board();
+                        board.printField();
+                        System.out.println((board.checkWin()));
+                        while(board.checkWin()){
+                            board.easyAi();
 
-        int nX = 0;
-        int nO = 0;
-        int nEmpty = 0;
+                            if(board.checkWin()) {
+                                board.easyAi();
+                            }
+                        }
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                char fieldChar = arr[i][j];
-                if (fieldChar == 'X') {
-                    nX++;
-                } else if (fieldChar == 'O') {
-                    nO++;
-                } else {
-                    nEmpty++;
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "useruser":
+                    {
+                        Board board = new Board();
+                        board.printField();
+                        while(board.checkWin()){
+                            board.userMove();
+
+                            if(board.checkWin()) {
+                                board.userMove();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "usereasy":
+                    {
+                        Board board = new Board();
+                        board.printField();
+                        while(board.checkWin()){
+                            board.userMove();
+
+                            if(board.checkWin()) {
+                                board.easyAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "easyuser":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.easyAi();
+
+                            if(board.checkWin()) {
+                                board.userMove();
+                            }
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "easymedium":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.easyAi();
+
+                            if(board.checkWin()) {
+                                board.mediumAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "usermedium":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.userMove();
+
+                            if(board.checkWin()) {
+                                board.mediumAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "mediumuser":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.mediumAi();
+
+                            if(board.checkWin()) {
+                                board.userMove();
+                            }
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "mediummedium":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.mediumAi();
+
+                            if(board.checkWin()) {
+                                board.mediumAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "mediumeasy":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.mediumAi();
+
+                            if(board.checkWin()) {
+                                board.easyAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "userhard":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.userMove();
+
+                            if(board.checkWin()) {
+                                board.hardAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "harduser":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.hardAi();
+
+                            if(board.checkWin()) {
+                                board.userMove();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "hardhard":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.hardAi();
+
+                            if(board.checkWin()) {
+                                board.hardAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "mediumhard":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.mediumAi();
+
+                            if(board.checkWin()) {
+                                board.hardAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "hardmedium":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.hardAi();
+
+                            if(board.checkWin()) {
+                                board.mediumAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "easyhard":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.easyAi();
+
+                            if(board.checkWin()) {
+                                board.hardAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    case "hardeasy":
+                    {
+                        Board board = new Board();
+                        board.printField();
+
+                        while(board.checkWin()){
+                            board.hardAi();
+
+                            if(board.checkWin()) {
+                                board.easyAi();
+                            }
+
+                        }
+
+                        System.out.print("Input command: ");
+                        inputs = scanner.nextLine().split(" ");
+                        break;
+                    }
+
+                    default:
+                        System.out.println("error");
+                        inputs[0] = "exit";
+                        break;
                 }
             }
-        }
-
-        int xWins = 0;
-        int oWins = 0;
-
-        for (int i = 0; i < 3; i++) {
-            //check rows for X
-            if (arr[i][0] == 'X' && arr[i][1] == 'X' && arr[i][2] == 'X') {
-                xWins++;
-            }
-            //check rows for O
-            if (arr[i][0] == 'O' && arr[i][1] == 'O' && arr[i][2] == 'O') {
-                oWins++;
-            }
-
-            //check columns for X
-            if (arr[0][i] == 'X' && arr[1][i] == 'X' && arr[2][i] == 'X') {
-                xWins++;
-            }
-            //check rows for O
-            if (arr[0][i] == 'O' && arr[1][i] == 'O' && arr[2][i] == 'O') {
-                oWins++;
-            }
 
         }
-
-        // check main diagonal for X
-        if (arr[0][0] == 'X' && arr[1][1] == 'X' && arr[2][2] == 'X') {
-            xWins++;
-        }
-        // check main diagonal for O
-        if (arr[0][0] == 'O' && arr[1][1] == 'O' && arr[2][2] == 'O') {
-            oWins++;
-        }
-        // check secondary diagonal for X
-        if (arr[0][2] == 'X' && arr[1][1] == 'X' && arr[2][0] == 'X') {
-            xWins++;
-        }
-        // check main diagonal for O
-        if (arr[0][2] == 'O' && arr[1][1] == 'O' && arr[2][0] == 'O') {
-            oWins++;
-        }
-
-        int dif = Math.abs(nX - nO);
-
-        if (xWins + oWins > 1 || dif > 1 ) {
-            System.out.println("Impossible");
-            return false;
-        }
-
-        if (xWins == 1 && oWins == 0 && dif < 2) {
-            System.out.println("X wins");
-            return false;
-        }
-
-        if (xWins == 0 && oWins == 1 && dif < 2) {
-            System.out.println("O wins");
-            return false;
-        }
-
-        if (xWins + oWins == 0 && nEmpty == 0) {
-            System.out.println("Draw");
-            return false;
-        }
-
-        if (xWins + oWins == 0 && nEmpty > 0 && dif < 2) {
-            System.out.println("Game not finished");
-            return true;
-        }
-        return true;
-    }
-
-    public static int ySwap(int y) {
-        if(y == 0){
-            y =+2;
-        }
-        else if(y == 2){
-            y-=2;
-        }
-        return y;
-    }
-
-    public static void userMove(Scanner scanner, char[][] arr, int turn){
-        boolean input = true;
-        int x = 0;
-        int y = 0;
-
-        System.out.println("Enter the coordinates: ");
-        x = scanner.nextInt()-1;
-        y = scanner.nextInt()-1;
-        while(input){
-            if(x >= 3 || y >= 3){
-                System.out.println("Coordinates should be from 1 to 3!");
-                System.out.println("Enter the coordinates: ");
-                x = scanner.nextInt()-1;
-                y = scanner.nextInt()-1;
-            }
-            else{
-                input = false;
-            }
-        }
-
-        y = ySwap(y);
-
-        while(arr[y][x] != '_'){
-            System.out.println("This cell is occupied! Choose another one! \n");
-            System.out.println("Enter the coordinates: ");
-            x = scanner.nextInt()-1;
-            y = scanner.nextInt()-1;
-
-            while(x >= 3 || y >= 3){
-                System.out.println("Coordinates should be from 1 to 3!");
-                System.out.println("Enter the coordinates: ");
-                x = scanner.nextInt()-1;
-                y = scanner.nextInt()-1;
-            }
-
-            y = ySwap(y);
-        }
-
-        if(turn % 2 == 0){
-            arr[y][x] = 'X';
-        }
-        else{
-            arr[y][x] = 'O';
-        }
-
-    }
-
-    public static void main(String[] args) {
-        // write your code here
-        Scanner scanner = new Scanner(System.in);
-
-        String cells = "_________";
-        char[][] arr = fillField(cells);
-
-        int turn = 0;
-
-        while(checkWin(arr)){
-            printField(arr);
-            userMove(scanner, arr, turn);
-            printField(arr);
-            turn++;
-        }
-
     }
 }
