@@ -3,3 +3,4 @@ First time using Swing to make a GUI, found it difficult due to the lack of mate
 Implementing this project could have gone better if I had split into an MVC model to make managing it easier.
 Currently the slider bar works to increase the speed of the game. 
 The other buttons are left non functioning.
+I also need to improve my habit of leaving comments in my code.
